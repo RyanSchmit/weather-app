@@ -1,2 +1,2 @@
 # weather-app
-a typescript app that parses data from the weather api
+a javascript app that parses data from a REST weather api to display the weather forecast
