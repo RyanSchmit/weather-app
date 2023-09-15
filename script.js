@@ -20,18 +20,13 @@ function parseLocation(str) {
     return str
 }
 
-async function parseJSON(start_location) {
-    let input_location = 'new-york';
-    if (start_location == false) {
-        let input_location = document.getElementById('location').value;
-        input_location = parseLocation(input_location)
-    }
-    const data = await getJSON(input_location)
+async function parseJSON(location) {
+    const data = await getJSON(location)
     console.log(data)
     const forecast = data.forecast.forecastday
     const weather_array = []
     for (day in forecast) {
-        weather_array.push(new WeatherData(forecast[day].date, forecast[day].day.mintemp_f, forecast[day].day.maxtemp_f))
+        weather_array.push(new WeatherData(forecast[day].date, forecast[day].day.maxtemp_f, forecast[day].day.mintemp_f))
     }
     return weather_array
 }
@@ -40,13 +35,16 @@ async function changeData(start) {
     const dates = document.querySelectorAll("#date");
     const highs = document.querySelectorAll("#high");
     const lows = document.querySelectorAll("#low");
+    const currLocation = document.getElementById('currLocation');
+    let input_location = 'new-york';
     let forecast = null;
-    if (start == true) {
-        forecast = await parseJSON(true)
+    if (start == false) {
+        input_location = document.getElementById('location').value;
+        currLocation.innerHTML = input_location;
+        input_location = parseLocation(input_location);
     }
-    else {
-        forecast = await parseJSON(false)
-    }
+    console.log(input_location)
+    forecast = await parseJSON(input_location)
     console.log(forecast)
     for (let i = 0; i < 3; i++) {
         dates[i].innerHTML = forecast[i].date;
