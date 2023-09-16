@@ -9,7 +9,7 @@ class WeatherData {
 async function getJSON(location) {
     const api_key = '3e21839e546a405eb90200255231408';
     const base_url = `https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${location}&days=7`;
-    const response = await fetch(base_url, {mode: 'cors'});
+    const response = await fetch(base_url);
     const data = await response.json()
     return data
 }
