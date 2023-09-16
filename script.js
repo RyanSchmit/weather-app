@@ -22,7 +22,6 @@ function parseLocation(str) {
 
 async function parseJSON(location) {
     const data = await getJSON(location)
-    console.log(data)
     const forecast = data.forecast.forecastday
     const weather_array = []
     for (day in forecast) {
@@ -43,9 +42,7 @@ async function changeData(start) {
         currLocation.innerHTML = input_location;
         input_location = parseLocation(input_location);
     }
-    console.log(input_location)
     forecast = await parseJSON(input_location)
-    console.log(forecast)
     for (let i = 0; i < 3; i++) {
         dates[i].innerHTML = forecast[i].date;
         highs[i].innerHTML = forecast[i].high;
